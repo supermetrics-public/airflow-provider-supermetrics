@@ -27,7 +27,7 @@ Build a production-grade Apache Airflow provider that wraps the official `superm
 |---|-------------|
 | F1 | Store Supermetrics API key securely in Airflow Connections with a custom connection type UI |
 | F2 | Execute ad-hoc queries against any Supermetrics-supported data source |
-| F3 | Support all query parameters: `ds_id`, `ds_accounts`, `fields`, `start_date`, `end_date`, plus arbitrary extras |
+| F3 | Support all query parameters: `ds_id`, `ds_accounts`, `fields`, `query_start_date`, `query_end_date`, plus arbitrary extras |
 | F4 | Create, monitor, and cancel DWH backfills |
 | F5 | Stream query results to Google Cloud Storage (NDJSON or CSV) |
 | F6 | Stream query results to Amazon S3 (NDJSON or CSV) |
@@ -251,7 +251,7 @@ Executes a query and pushes the full result (rows as list-of-dicts) to XCom.
 
 | Attribute | Detail |
 |-----------|--------|
-| `template_fields` | `ds_id`, `ds_accounts`, `fields`, `start_date`, `end_date`, `query_params` |
+| `template_fields` | `ds_id`, `ds_accounts`, `fields`, `query_start_date`, `query_end_date`, `query_params` |
 | `ui_color` | `#00b4d8` |
 | Returns | `list[dict]` serialized from `result.rows` |
 
@@ -264,8 +264,8 @@ def __init__(
     ds_id: str,                          # e.g. "GAWA", "FA", "AW"
     ds_accounts: list[str],              # account IDs within the data source
     fields: list[str],                   # dimensions + metrics to retrieve
-    start_date: str,                     # YYYY-MM-DD
-    end_date: str,                       # YYYY-MM-DD
+    query_start_date: str,               # YYYY-MM-DD
+    query_end_date: str,                 # YYYY-MM-DD
     query_params: dict | None = None,    # extra SDK query kwargs
     supermetrics_conn_id: str = SupermetricsHook.default_conn_name,
     deferrable: bool = conf.getboolean("operators", "default_deferrable", fallback=False),

@@ -50,8 +50,8 @@ def weekly_ad_benchmark():
         ds_id="AW",
         ds_accounts=["{{ var.value.google_ads_customer_id }}"],
         fields=["CampaignName", "Impressions", "Clicks", "Cost", "Conversions"],
-        start_date="{{ macros.ds_add(ds, -7) }}",
-        end_date="{{ ds }}",
+        query_start_date="{{ macros.ds_add(ds, -7) }}",
+        query_end_date="{{ ds }}",
         query_params={"max_rows": 10000},
     )
 
@@ -61,8 +61,8 @@ def weekly_ad_benchmark():
         ds_id="LI",
         ds_accounts=["{{ var.value.linkedin_ad_account_id }}"],
         fields=["CampaignName", "Impressions", "Clicks", "Spend", "Conversions"],
-        start_date="{{ macros.ds_add(ds, -7) }}",
-        end_date="{{ ds }}",
+        query_start_date="{{ macros.ds_add(ds, -7) }}",
+        query_end_date="{{ ds }}",
     )
 
     # Enrich data with derived KPIs

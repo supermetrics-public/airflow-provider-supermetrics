@@ -1,0 +1,66 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "airflow-provider-supermetrics"
+version = "0.1.0"
+description = "Apache Airflow provider package for Supermetrics"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11"
+keywords = ["airflow", "provider", "supermetrics", "analytics"]
+classifiers = [
+    "Framework :: Apache Airflow",
+    "Framework :: Apache Airflow :: Provider",
+    "Development Status :: 3 - Alpha",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dependencies = [
+    "apache-airflow>=2.7.0",
+    "supermetrics>=0.2.0b2,<0.3.0",
+]
+
+[project.optional-dependencies]
+gcs = ["apache-airflow-providers-google>=10.0.0"]
+s3 = ["apache-airflow-providers-amazon>=8.0.0"]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.23",
+    "ruff",
+    "black",
+    "mypy",
+    "pre-commit",
+]
+
+[project.entry-points."apache_airflow_provider"]
+provider_info = "airflow.providers.supermetrics:get_provider_info"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/airflow"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.black]
+target-version = ["py311"]
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/airflow/providers/supermetrics --cov-report=term-missing --cov-fail-under=90"
+asyncio_mode = "auto"

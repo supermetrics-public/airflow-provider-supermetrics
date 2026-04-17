@@ -10,6 +10,13 @@ Package name: `airflow-provider-supermetrics`. Namespace: `airflow.providers.sup
 - SDK is beta (`0.2.0b2`) — pin `>=0.2.0b2,<0.3.0`
 - Follow official Airflow provider conventions (entry points, hook registration, connection UI)
 
+## Project Layout
+Uses `src/` layout to avoid namespace conflicts with installed Airflow:
+- Source code: `src/airflow/providers/supermetrics/`
+- Tests: `tests/providers/supermetrics/`
+- Virtual environment: `.venv/` (run tests with `.venv/bin/python -m pytest`)
+- `src/airflow/__init__.py` and `src/airflow/providers/__init__.py` must NOT exist (implicit namespace packages)
+
 ## Tooling
 - Formatter: `black` (line-length 100)
 - Linter: `ruff` (target-version py311, line-length 100)
