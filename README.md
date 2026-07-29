@@ -1,5 +1,9 @@
 # airflow-provider-supermetrics
 
+> **Early Beta — Use at Your Own Risk**
+>
+> This package is in early beta. APIs may change without notice, bugs are expected, and there are no stability or reliability guarantees. Use as-is. Not recommended for production workloads.
+
 Apache Airflow provider package for [Supermetrics](https://supermetrics.com), enabling DAG authors to query analytics data from 100+ marketing platforms directly from Airflow.
 
 ## Requirements
@@ -166,6 +170,14 @@ get_login = SupermetricsGetLoginOperator(task_id="get_login", login_id="login-12
 
 All operators support Jinja2 templating on key fields. Use `{{ ds }}`, `{{ macros.ds_add(ds, -7) }}`, and other Airflow macros for dynamic date parameters.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Security
+
+See [SECURITY.md](SECURITY.md). This is pre-release software — no audit, no backports, no patch guarantees.
+
 ## License
 
-Apache-2.0
+Apache-2.0. See [LICENSE](LICENSE).
