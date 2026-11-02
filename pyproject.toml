@@ -19,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
     "apache-airflow>=2.7.0",
-    "supermetrics>=0.5.1,<0.6.0",
+    "supermetrics>=0.6.0,<0.7.0",
 ]
 
 [project.optional-dependencies]
